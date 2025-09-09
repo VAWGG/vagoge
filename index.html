@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VAGOGE – Công ty an ninh mạng tiên phong</title>
+  <meta name="description" content="VAGOGE bảo vệ dữ liệu, tài sản số và chủ quyền số. Giải pháp bảo mật tiên tiến, tư vấn chuyên sâu, đồng hành chuyển đổi số quốc gia." />
+  <meta name="theme-color" content="#0b4aa2" />
+  <meta property="og:title" content="VAGOGE – Công ty an ninh mạng tiên phong" />
+  <meta property="og:description" content="Bảo vệ dữ liệu – Bảo vệ tương lai. Giải pháp và dịch vụ an ninh mạng toàn diện cho doanh nghiệp và tổ chức." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="vi_VN" />
+  <link rel="canonical" href="/" />
+
+  <style>
+    :root {
+      --blue-900: #0b2a4a;
+      --blue-700: #0b4aa2;
+      --blue-500: #1976d2;
+      --accent: #f5a524; /* vàng ánh kim nhẹ */
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #4b5563;
+      --shadow: 0 10px 30px rgba(2, 8, 23, 0.08);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --maxw: 1200px;
+    }
+
+    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    /* NAVBAR */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 78px;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: saturate(180%) blur(10px);
+      box-shadow: 0 1px 0 rgba(15,23,42,0.06);
+      z-index: 1000;
+      transition: height .25s ease, box-shadow .25s ease;
+    }
+    .nav.shrink { height: 58px; box-shadow: 0 4px 20px rgba(15,23,42,0.06); }
+    .nav-inner {
+      width: 100%;
+      max-width: var(--maxw);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--blue-700), var(--blue-500));
+      display: grid; place-items: center; color: #fff; font-weight: 800;
+    }
+    .brand span { font-weight: 800; color: var(--blue-700); letter-spacing: 0.3px; }
+    .menu { display: flex; gap: 20px; align-items: center; }
+    .menu a {
+      text-decoration: none; color: var(--text);
+      padding: 8px 12px; border-radius: 8px;
+      font-weight: 600; font-size: 14px;
+    }
+    .menu a:hover { color: var(--blue-700); background: rgba(11,74,162,0.08); }
+    .cta-nav { background: var(--blue-700); color: #fff !important; }
+    .cta-nav:hover { background: var(--blue-500); }
+    .burger { display: none; background: none; border: 0; font-size: 22px; }
+
+    /* Responsive menu */
+    @media (max-width: 960px) {
+      .burger { display: block; }
+      .menu { position: fixed; top: 78px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 14px 20px; display: none; box-shadow: var(--shadow); }
+      .nav.shrink + .menu { top: 58px; }
+      .menu.open { display: flex; }
+    }
+
+    /* HERO */
+    .hero {
+      padding-top: 96px;
+      background: radial-gradient(1200px 400px at 50% -50%, rgba(25,118,210,0.22), transparent), #fff;
+      border-bottom: 1px solid rgba(15,23,42,0.06);
+    }
+    .hero-inner { max-width: var(--maxw); margin: 0 auto; padding: 64px 20px 48px; display: grid; grid-template-columns: 1.3fr 1fr; align-items: center; gap: 28px; }
+    .hero h1 { font-size: 38px; line-height: 1.2; margin: 0 0 14px; color: var(--blue-900); }
+    .hero p { margin: 0 0 22px; color: var(--muted); font-size: 18px; }
+    .hero .actions { display: flex; gap: 12px; align-items: center; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; border: 0; cursor: pointer; border-radius: 12px; padding: 12px 16px; font-weight: 700; }
+    .btn.primary { background: var(--blue-700); color: #fff; }
+    .btn.primary:hover { background: var(--blue-500); }
+    .btn.ghost { background: transparent; color: var(--blue-700); border: 2px solid rgba(11,74,162,0.2); }
+    .btn.ghost:hover { border-color: var(--blue-700); }
+    .hero-ill {
+      width: 100%; aspect-ratio: 4/3; border-radius: var(--radius);
+      background:
+        radial-gradient(120px 120px at 20% 30%, rgba(255,255,255,0.5), rgba(255,255,255,0)),
+        linear-gradient(135deg, #0b4aa2 0%, #0b2a4a 100%);
+      position: relative; overflow: hidden; box-shadow: var(--shadow);
+    }
+    .shield { position: absolute; inset: 0; display: grid; place-items: center; }
+    .shield svg { width: 46%; height: auto; filter: drop-shadow(0 12px 24px rgba(0,0,0,0.2)); }
+    .shield .pulse { position: absolute; width: 200px; height: 200px; border: 2px solid rgba(255,255,255,0.5); border-radius: 999px; animation: pulse 4s ease-in-out infinite; }
+    .shield .pulse:nth-child(2) { animation-delay: .8s; }
+    .shield .pulse:nth-child(3) { animation-delay: 1.6s; }
+    @keyframes pulse { 0%{ transform: scale(0.6); opacity: .8;} 100%{ transform: scale(2.2); opacity: 0;} }
+
+    @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; padding-top: 42px; }
+    }
+
+    /* SECTIONS */
+    section { padding: 64px 20px; }
+    .section-inner { max-width: var(--maxw); margin: 0 auto; }
+    .section-title { margin: 0 0 22px; font-size: 28px; color: var(--blue-900); }
+    .muted { color: var(--muted); }
+
+    /* Pillars */
+    .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { background: var(--card); border: 1px solid rgba(15,23,42,0.06); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .card .icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(11,74,162,0.1); display: grid; place-items: center; color: var(--blue-700); margin-bottom: 8px; }
+    .card h3 { margin: 6px 0 8px; }
+    @media (max-width: 960px) { .pillars { grid-template-columns: 1fr; } }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .value { text-align: center; padding: 16px; border-radius: var(--radius-sm); background: #fff; border: 1px solid rgba(15,23,42,0.06); }
+    .value .round { width: 54px; height: 54px; border-radius: 999px; margin: 0 auto 8px; display: grid; place-items: center; background: rgba(11,74,162,0.08); color: var(--blue-700); font-weight: 800; }
+    @media (max-width: 960px) { .about-grid { grid-template-columns: 1fr; } .values { grid-template-columns: 1fr; } }
+
+    /* Solutions (tabs + accordion) */
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .tab { padding: 10px 14px; border-radius: 999px; border: 1px solid rgba(11,74,162,0.2); color: var(--blue-700); background: #fff; cursor: pointer; font-weight: 700; }
+    .tab.active { background: var(--blue-700); color: #fff; border-color: var(--blue-700); }
+    .tabpanels > .tabpanel { display: none; }
+    .tabpanels > .tabpanel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .sol-ill { background: #fff; border: 1px dashed rgba(11,74,162,0.3); border-radius: var(--radius); min-height: 200px; display: grid; place-items: center; color: var(--muted); }
+    .accordion { display: none; }
+    @media (max-width: 960px) { .tabpanels > .tabpanel.active { grid-template-columns: 1fr; } .tabs { display: none; } .accordion { display: grid; gap: 10px; } }
+    details.sol { background: #fff; border: 1px solid rgba(15,23,42,0.08); border-radius: var(--radius-sm); padding: 12px 14px; }
+    details.sol summary { cursor: pointer; font-weight: 700; color: var(--blue-700); }
+    details.sol[open] { box-shadow: var(--shadow); }
+
+    /* Consulting services */
+    .services { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .service { background: #fff; border-radius: var(--radius); padding: 16px; border: 1px solid rgba(15,23,42,0.06); box-shadow: var(--shadow); display: grid; gap: 8px; }
+    .service .cta { justify-self: start; }
+    @media (max-width: 960px) { .services { grid-template-columns: 1fr; } }
+
+    /* Partners carousel */
+    .carousel { overflow: hidden; background: #fff; border: 1px solid rgba(15,23,42,0.06); border-radius: var(--radius); }
+    .track { display: flex; gap: 36px; padding: 16px; animation: scroll 18s linear infinite; }
+    .partner { min-width: 140px; height: 56px; border-radius: 10px; display: grid; place-items: center; background: #f1f5f9; color: #334155; font-weight: 700; }
+    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* Contact */
+    .contact-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; }
+    .form { background: #fff; border: 1px solid rgba(15,23,42,0.06); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form label { font-weight: 700; font-size: 14px; }
+    .form input, .form textarea { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 14px; }
+    .form textarea { min-height: 120px; resize: vertical; }
+    .map { background: #fff; border: 1px solid rgba(15,23,42,0.06); border-radius: var(--radius); padding: 0; overflow: hidden; box-shadow: var(--shadow); }
+    .map .placeholder { width: 100%; aspect-ratio: 4/3; display: grid; place-items: center; color: var(--muted); background: linear-gradient(135deg, #f8fafc, #eff6ff); }
+    @media (max-width: 960px) { .contact-grid { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
+
+    /* Footer */
+    footer { padding: 28px 20px 80px; color: #475569; text-align: center; }
+
+    /* Floating chat button */
+    .chat { position: fixed; right: 18px; bottom: 18px; z-index: 999; }
+    .chat button { background: var(--accent); color: #111827; border: 0; border-radius: 999px; padding: 12px 16px; font-weight: 800; box-shadow: var(--shadow); cursor: pointer; }
+    .chat button:hover { filter: brightness(0.95); }
+
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(16px); transition: all .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Pricing */
+    .pricing-header { text-align: center; margin-bottom: 12px; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .plan { background: #fff; border: 1px solid rgba(15,23,42,0.08); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; display: grid; }
+    .plan.best { background: #fff7ed; border-color: #fdba74; }
+    .plan .head { padding: 14px 16px; border-bottom: 1px solid rgba(15,23,42,0.06); background: #fff; }
+    .plan.best .head { background: linear-gradient(0deg, rgba(253,186,116,0.22), rgba(253,186,116,0.22)), #fff; }
+    .badge { display: inline-block; background: var(--accent); color: #111827; font-weight: 800; padding: 4px 10px; border-radius: 999px; font-size: 12px; }
+    .plan .body { padding: 14px 16px; display: grid; gap: 12px; }
+    .plan .desc { color: var(--muted); font-size: 14px; }
+    .divider { height: 1px; background: rgba(15,23,42,0.06); margin: 6px 0; }
+    .feature-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: 14px; }
+    .feature-list li::before { content: "✓"; color: #16a34a; font-weight: 900; margin-right: 8px; }
+    .plan .cta { margin-top: 6px; }
+    @media (max-width: 1200px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 720px) { .pricing-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="nav" role="navigation">
+    <div class="nav-inner">
+      <a href="#home" class="brand" aria-label="VAGOGE">
+        <div class="logo" aria-hidden="true">V</div>
+        <span>VAGOGE</span>
+      </a>
+      <button class="burger" aria-label="Mở menu">☰</button>
+      <div class="menu" id="menu">
+        <a href="#about">Giới thiệu</a>
+        <a href="#solutions">Sản phẩm</a>
+        <a href="#pricing">Bảng giá</a>
+        <a href="#consulting">Dịch vụ tư vấn</a>
+        <a href="#partners">Đối tác – Khách hàng</a>
+        <a href="#contact" class="cta-nav">Liên hệ</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="home">
+    <div class="hero-inner">
+      <div>
+        <h1>Vagoge – Công ty an ninh mạng tiên phong</h1>
+        <p class="muted">Bảo vệ dữ liệu – Bảo vệ tương lai</p>
+        <div class="actions">
+          <a href="#contact" class="btn primary">Liên hệ tư vấn</a>
+          <a href="#solutions" class="btn ghost">Xem giải pháp</a>
+        </div>
+      </div>
+      <div class="hero-ill" aria-hidden="true">
+        <div class="shield">
+          <div class="pulse"></div>
+          <div class="pulse"></div>
+          <div class="pulse"></div>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2l7 3v5c0 5.25-3.438 10-7 12-3.562-2-7-6.75-7-12V5l7-3z" fill="#ffffff" opacity="0.15"/>
+            <path d="M12 3.3l5.6 2.4v4.3c0 4.6-3 8.7-5.6 10.8C9.4 18.7 6.4 14.6 6.4 10V5.7L12 3.3z" stroke="#fff" stroke-width="1.4"/>
+            <path d="M9.5 11.8l1.9 1.9 3.6-3.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PILLARS -->
+  <section aria-labelledby="pillars-title" class="reveal">
+    <div class="section-inner">
+      <h2 id="pillars-title" class="section-title">Các trụ cột chiến lược</h2>
+      <div class="pillars">
+        <div class="card">
+          <div class="icon">🔒</div>
+          <h3>Bảo vệ dữ liệu cá nhân</h3>
+          <p class="muted">Áp dụng công nghệ bảo mật thế hệ mới để bảo vệ thông tin riêng tư.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🛡️</div>
+          <h3>Bảo vệ tài sản số</h3>
+          <p class="muted">Phòng thủ chủ động, tích hợp AI để ngăn ngừa và phát hiện sớm.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🇻🇳</div>
+          <h3>Bảo vệ chủ quyền số</h3>
+          <p class="muted">Nền tảng tự chủ cho Việt Nam số vững mạnh và an toàn.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" aria-labelledby="pricing-title" class="reveal">
+    <div class="section-inner">
+      <div class="pricing-header">
+        <h2 id="pricing-title" class="section-title">Bảng Giá Dịch Vụ Tại <span style="color: var(--accent);">VAGOGE</span></h2>
+        <div class="muted" style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; font-size:14px;">
+          <span>6 tháng: 0%</span>
+          <span>1 năm: -10%</span>
+          <span>2 năm: -20%</span>
+          <span>3 năm: -25%</span>
+          <span>5 năm: -35%</span>
+          <span>10 năm: -50%</span>
+        </div>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- ADVANCED -->
+        <div class="plan">
+          <div class="head">
+            <strong>ADVANCED</strong>
+            <div class="muted" style="font-size:12px;">Dành cho doanh nghiệp vừa và nhỏ</div>
+          </div>
+          <div class="body">
+            <a href="#contact" class="btn ghost cta">LIÊN HỆ NGAY</a>
+            <div class="divider"></div>
+            <strong>Tính năng bao gồm:</strong>
+            <ul class="feature-list">
+              <li>Phù hợp với mọi thiết bị</li>
+              <li>Hỗ trợ khách hàng tối đa</li>
+              <li>Chăm sóc khách hàng 24/7</li>
+              <li>Bảo hành 6 tháng kể từ khi mua</li>
+              <li>Chống virus, malware</li>
+              <li>Phát hiện tấn công APT, zero-day</li>
+              <li>Firewall, chống xâm nhập</li>
+              <li>Kiểm soát thiết bị ngoại vi</li>
+              <li>Truy nguyên sự cố, forensics</li>
+              <li>Cô lập thiết bị nhiễm</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- PREMIUM -->
+        <div class="plan">
+          <div class="head">
+            <strong>PREMIUM</strong>
+            <div class="muted" style="font-size:12px;">Giải pháp tối ưu hơn cho hành trình bảo mật nâng cao</div>
+          </div>
+          <div class="body">
+            <a href="#contact" class="btn ghost cta">LIÊN HỆ NGAY</a>
+            <div class="divider"></div>
+            <strong>Tính năng bao gồm:</strong>
+            <ul class="feature-list">
+              <li>Bảo hành 6 tháng kể từ khi mua</li>
+              <li>Phân tích hành vi người dùng (UEBA)</li>
+              <li>Giám sát clipboard, email, dữ liệu</li>
+              <li>Thiết lập chính sách phân quyền chi tiết</li>
+              <li>Tự động mã hóa hoặc chặn dữ liệu</li>
+              <li>Quản lý thiết bị whitelist/phần mềm</li>
+              <li>Quản lý danh sách người dùng</li>
+              <li>Tích hợp Active Directory, LDAP</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ELITE (Best) -->
+        <div class="plan best">
+          <div class="head">
+            <span class="badge">Best</span>
+            <strong style="margin-left:8px;">ELITE</strong>
+            <div class="muted" style="font-size:12px;">Lựa chọn tốt cho doanh nghiệp cần vận hành an toàn và giảm rủi ro dữ liệu</div>
+          </div>
+          <div class="body">
+            <a href="#contact" class="btn primary cta">LIÊN HỆ NGAY</a>
+            <div class="divider"></div>
+            <strong>Tính năng bao gồm:</strong>
+            <ul class="feature-list">
+              <li>Chính sách linh hoạt, triển khai từ xa</li>
+              <li>Truy nguyên sự cố, forensics nâng cao</li>
+              <li>Phân tích hành vi người dùng (UEBA)</li>
+              <li>Cô lập thiết bị nhiễm</li>
+              <li>Rollback hệ thống</li>
+              <li>Tự động cảnh báo theo playbook</li>
+              <li>Giám sát clipboard, email, dữ liệu</li>
+              <li>Thiết lập chính sách phân quyền chi tiết</li>
+              <li>Tự động mã hóa hoặc chặn dữ liệu</li>
+              <li>Quản lý whitelist phần mềm & thiết bị</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ULTIMATE -->
+        <div class="plan">
+          <div class="head">
+            <strong>ULTIMATE</strong>
+            <div class="muted" style="font-size:12px;">Bảo vệ toàn diện với khả năng tích hợp và mở rộng cho doanh nghiệp lớn</div>
+          </div>
+          <div class="body">
+            <a href="#contact" class="btn ghost cta">LIÊN HỆ NGAY</a>
+            <div class="divider"></div>
+            <strong>Tính năng bao gồm:</strong>
+            <ul class="feature-list">
+              <li>IOC + Threat Intelligence</li>
+              <li>Playbook động</li>
+              <li>Tích hợp SIEM/SOAR</li>
+              <li>Data Loss Prevention (DLP)</li>
+              <li>Tích hợp Active Directory</li>
+              <li>Cô lập thiết bị nhiễm</li>
+              <li>Chống virus, malware nâng cao</li>
+              <li>Firewall, chống xâm nhập</li>
+              <li>Truy nguyên sự cố cấp tổ chức</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" aria-labelledby="about-title" class="reveal">
+    <div class="section-inner">
+      <h2 id="about-title" class="section-title">Giới thiệu về VAGOGE</h2>
+      <div class="about-grid">
+        <div>
+          <p class="muted">Thành lập năm 2023, VAGOGE đồng hành cùng Trung tâm Dữ liệu Quốc gia về Dân cư và Trung tâm Dữ liệu Quốc gia, dẫn dắt cuộc cách mạng số hoá và kiến tạo tương lai số an toàn cho Việt Nam.</p>
+          <div class="card" style="margin-top:12px;">
+            <h3>Định vị & Slogan</h3>
+            <p class="muted">VAGOGE – Bảo vệ dữ liệu, bảo vệ tương lai. Chúng tôi không chỉ cung cấp giải pháp công nghệ mà còn đồng hành trong hành trình kiến tạo không gian số an toàn cho doanh nghiệp Việt Nam.</p>
+            <div class="actions" style="margin-top:8px;">
+              <a href="#solutions" class="btn primary">Xem Sản phẩm</a>
+              <a href="#consulting" class="btn ghost">Xem Dịch vụ</a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <h3>Tầm nhìn – Sứ mệnh – Giá trị cốt lõi</h3>
+            <p><strong>Tầm nhìn:</strong> Trở thành công ty an ninh mạng hàng đầu bảo vệ dữ liệu, tài sản số quốc gia và đảm bảo chủ quyền số, tạo động lực cho kinh tế số.</p>
+            <p><strong>Sứ mệnh:</strong> Bảo vệ dữ liệu – Đưa an toàn thông tin đến gần doanh nghiệp – Nâng cao nhận thức và năng lực bảo mật.</p>
+            <div class="values">
+              <div class="value">
+                <div class="round">✓</div>
+                <strong>Tin cậy</strong>
+                <p class="muted">Đồng hành bền bỉ cùng đối tác, khách hàng.</p>
+              </div>
+              <div class="value">
+                <div class="round">⚙️</div>
+                <strong>Tự chủ công nghệ</strong>
+                <p class="muted">Nghiên cứu & phát triển làm chủ nền tảng.</p>
+              </div>
+              <div class="value">
+                <div class="round">🎯</div>
+                <strong>Sẵn sàng</strong>
+                <p class="muted">Vì mục tiêu chuyển đổi số quốc gia.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:12px; font-style: italic;">“VAGOGE không chỉ cung cấp giải pháp công nghệ mà còn đồng hành trong hành trình kiến tạo không gian số an toàn cho doanh nghiệp Việt Nam”.</p>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS -->
+  <section id="solutions" aria-labelledby="solutions-title" class="reveal">
+    <div class="section-inner">
+      <h2 id="solutions-title" class="section-title">Giải pháp</h2>
+      <div class="tabs" role="tablist" aria-label="Giải pháp">
+        <button class="tab active" role="tab" aria-selected="true" aria-controls="panel-rar" id="tab-rar">Rar EP</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="panel-vgsend" id="tab-vgsend">vgSend</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="panel-pdp" id="tab-pdp">PDP as a Service</button>
+      </div>
+      <div class="tabpanels">
+        <div class="tabpanel active" id="panel-rar" role="tabpanel" aria-labelledby="tab-rar">
+          <div class="card">
+            <h3>Rar EP</h3>
+            <p><strong>Điểm khác biệt:</strong> Rar EP được thiết kế dựa trên nhu cầu của nhà quản trị cần kiểm soát và đồng bộ hệ thống CNTT, thiết bị người dùng một cách tập trung và chuyên nghiệp, đặc biệt cho các đơn vị cần bảo vệ, giám sát, tránh lộ lọt dữ liệu nội bộ, bí mật công ty, bí mật nhà nước.</p>
+            <p><strong>Cách hoạt động:</strong></p>
+            <ul>
+              <li>Theo dõi thiết bị ngoại vi, quản trị tập trung → thiết lập chính sách từ xa</li>
+              <li>Áp dụng đồng loạt chính sách quản trị đến người dùng</li>
+              <li>Khả năng tích hợp linh hoạt AV, DLP</li>
+            </ul>
+            <p><strong>Lợi ích cho khách hàng:</strong></p>
+            <ul>
+              <li>Ngăn chặn rò rỉ thông tin nhạy cảm, bí mật</li>
+              <li>Đáp ứng ISO 27001 và yêu cầu ATTT cấp độ 4</li>
+              <li>Hỗ trợ điều tra truy vết qua nhật ký người dùng, thiết bị, tài liệu...</li>
+            </ul>
+          </div>
+          <div class="sol-ill">Minh họa bảo mật / icon</div>
+        </div>
+        <div class="tabpanel" id="panel-vgsend" role="tabpanel" aria-labelledby="tab-vgsend">
+          <div class="card">
+            <h3>vgSend – Hệ thống quản lý & truyền file an toàn</h3>
+            <p><strong>Điểm khác biệt:</strong> Đáp ứng gửi nhận, chia sẻ, lưu trữ dữ liệu khối lượng lớn, quy mô quốc gia an toàn và truy vấn thông minh. Tùy chỉnh sâu tiêu chí ATTT, tự động quét – làm sạch – xác thực mọi tệp trước khi đưa vào trung tâm dữ liệu.</p>
+            <p><strong>Cách hoạt động:</strong></p>
+            <ul>
+              <li>Quét virus và quản lý tệp ngay khi gửi lên</li>
+              <li>Lưu trữ và chia sẻ dữ liệu đã làm sạch để truy vấn nhanh</li>
+              <li>Chỉ tệp đã kiểm duyệt, làm sạch mới được đưa vào trung tâm dữ liệu</li>
+              <li>Ghi log chi tiết phục vụ kiểm tra, truy vết</li>
+            </ul>
+            <p><strong>Lợi ích cho khách hàng:</strong></p>
+            <ul>
+              <li>Ngăn chặn đưa mã độc hoặc dữ liệu nhiễm độc vào trung tâm dữ liệu</li>
+              <li>Khai thác dữ liệu sạch hiệu quả, giảm thiểu lây nhiễm từ con người</li>
+              <li>Quản trị trực quan, tập trung qua bảng điều khiển</li>
+            </ul>
+          </div>
+          <div class="sol-ill">Minh họa quản lý tệp / icon</div>
+        </div>
+        <div class="tabpanel" id="panel-pdp" role="tabpanel" aria-labelledby="tab-pdp">
+          <div class="card">
+            <h3>PDP as a Service</h3>
+            <p><strong>Khác biệt:</strong> Thiết kế chuyên biệt cho DPO để đảm bảo tuân thủ theo khung pháp lý Việt Nam (Nghị định 13/2023/NĐ-CP, Luật số 91/2025/QH15). Triển khai trong vài giờ – không cần hạ tầng riêng; báo cáo tự động trên một hệ thống duy nhất.</p>
+            <p><strong>Cách hoạt động:</strong></p>
+            <ul>
+              <li>Cung cấp mẫu báo cáo theo quy định, tùy chỉnh theo ngành</li>
+              <li>Tự động lưu trữ, cảnh báo hạn kỳ</li>
+              <li>Đánh giá rủi ro (DPIA), quản lý phản hồi của chủ thể dữ liệu</li>
+              <li>Hỗ trợ tạo cookie consent cho đa dạng đối tượng</li>
+            </ul>
+            <p><strong>Lợi ích:</strong> Tiết kiệm thời gian báo cáo, đảm bảo tuân thủ pháp luật, loại bỏ rủi ro pháp lý, quản lý dữ liệu cá nhân toàn diện – từ thu thập, xử lý, lưu trữ đến phản hồi khiếu nại – tất cả trong một nền tảng.</p>
+          </div>
+          <div class="sol-ill">Minh họa tuân thủ / icon</div>
+        </div>
+      </div>
+
+      <!-- Accordion (mobile) -->
+      <div class="accordion" id="solutions-accordion">
+        <details class="sol">
+          <summary>Rar EP</summary>
+          <div style="margin-top:8px;" class="muted">Nội dung tương tự tab Rar EP ở trên.</div>
+        </details>
+        <details class="sol">
+          <summary>vgSend</summary>
+          <div style="margin-top:8px;" class="muted">Nội dung tương tự tab vgSend ở trên.</div>
+        </details>
+        <details class="sol">
+          <summary>PDP as a Service</summary>
+          <div style="margin-top:8px;" class="muted">Nội dung tương tự tab PDP ở trên.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSULTING SERVICES -->
+  <section id="consulting" aria-labelledby="consulting-title" class="reveal">
+    <div class="section-inner">
+      <h2 id="consulting-title" class="section-title">Dịch vụ tư vấn</h2>
+      <div class="services">
+        <div class="service">
+          <h3>A. Đánh giá cấp độ An toàn thông tin</h3>
+          <p><strong>Điểm khác biệt:</strong> VGG phối hợp chặt chẽ với cơ quan chức năng ngay từ giai đoạn khảo sát và tư vấn đánh giá.</p>
+          <p><strong>Giá trị mang lại:</strong></p>
+          <ul>
+            <li>Giảm thời gian, tăng tỉ lệ đáp ứng, giảm thủ tục hành chính</li>
+            <li>Tư vấn lộ trình nâng cấp đáp ứng cấp độ bảo mật</li>
+          </ul>
+          <a href="#contact" class="btn primary cta">Đặt lịch tư vấn</a>
+        </div>
+        <div class="service">
+          <h3>B. Đánh giá An toàn thông tin</h3>
+          <p><strong>Điểm khác biệt:</strong> Đội ngũ chuyên gia ATTT hàng đầu, được tin tưởng đánh giá cho các đơn vị kết nối vào hạ tầng trọng yếu quốc gia.</p>
+          <p><strong>Giá trị mang lại:</strong></p>
+          <ul>
+            <li>Phát hiện lỗ hổng trước khi bị khai thác</li>
+            <li>Đánh giá dấu hiệu xâm nhập tiềm ẩn từ nhiều năm</li>
+            <li>Đáp ứng yêu cầu đánh giá để kết nối hạ tầng trọng yếu nhanh</li>
+          </ul>
+          <a href="#contact" class="btn primary cta">Đặt lịch tư vấn</a>
+        </div>
+        <div class="service">
+          <h3>C. Đánh giá rủi ro trí tuệ nhân tạo (AI)</h3>
+          <p><strong>Điểm khác biệt:</strong> Một trong số ít đơn vị tại Việt Nam phát triển phương pháp đánh giá toàn diện rủi ro AI bao gồm bảo mật, đạo đức và tuân thủ.</p>
+          <p><strong>Giá trị mang lại:</strong></p>
+          <ul>
+            <li>Triển khai AI trong khuôn khổ pháp lý, đảm bảo đạo đức</li>
+            <li>Ngăn mô hình bị lợi dụng, rò rỉ dữ liệu</li>
+          </ul>
+          <a href="#contact" class="btn primary cta">Đặt lịch tư vấn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section id="partners" aria-labelledby="partners-title" class="reveal">
+    <div class="section-inner">
+      <h2 id="partners-title" class="section-title">Đối tác – Khách hàng</h2>
+      <p class="muted">Được tin tưởng bởi các đơn vị nghiệp vụ</p>
+      <div class="carousel" aria-label="Logo đối tác">
+        <div class="track" id="partner-track">
+          <div class="partner">Đối tác A</div>
+          <div class="partner">Đối tác B</div>
+          <div class="partner">Đối tác C</div>
+          <div class="partner">Đối tác D</div>
+          <div class="partner">Đối tác E</div>
+          <div class="partner">Đối tác F</div>
+          <!-- duplicate for seamless scroll -->
+          <div class="partner">Đối tác A</div>
+          <div class="partner">Đối tác B</div>
+          <div class="partner">Đối tác C</div>
+          <div class="partner">Đối tác D</div>
+          <div class="partner">Đối tác E</div>
+          <div class="partner">Đối tác F</div>
+        </div>
+      </div>
+      <blockquote class="card" style="margin-top:14px; font-style: italic; border-left: 4px solid var(--accent);">
+        “Vagoge – Công ty an ninh mạng tiên phong cung cấp giải pháp và dịch vụ bảo mật phục vụ chuyển đổi số quốc gia …”
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" aria-labelledby="contact-title" class="reveal">
+    <div class="section-inner">
+      <h2 id="contact-title" class="section-title">Liên hệ</h2>
+      <div class="contact-grid">
+        <form class="form" id="contact-form" novalidate>
+          <div class="form-row">
+            <div>
+              <label for="name">Họ và tên</label>
+              <input id="name" name="name" type="text" placeholder="Nguyễn Văn A" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="ban@congty.com" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div>
+              <label for="phone">Số điện thoại</label>
+              <input id="phone" name="phone" type="tel" placeholder="098 595 1865" required />
+            </div>
+            <div>
+              <label for="subject">Chủ đề</label>
+              <input id="subject" name="subject" type="text" placeholder="Yêu cầu tư vấn" />
+            </div>
+          </div>
+          <div>
+            <label for="message">Nội dung</label>
+            <textarea id="message" name="message" placeholder="Mô tả nhu cầu của bạn" required></textarea>
+          </div>
+          <div class="muted" style="font-size:12px; margin:8px 0;">
+            reCAPTCHA sẽ được tích hợp ở bước kết nối backend.
+          </div>
+          <button class="btn primary" type="submit">Gửi yêu cầu</button>
+        </form>
+
+        <aside>
+          <div class="card" style="margin-bottom:12px;">
+            <h3>Thông tin liên hệ</h3>
+            <p><strong>Điện thoại:</strong> <a href="tel:0985951865">098 595 1865</a></p>
+            <p><strong>Email:</strong> <a href="mailto:info@vagoge.com">info@vagoge.com</a></p>
+            <p><strong>ĐKKD:</strong> Tầng 6, tòa nhà AZ Lâm Viên, 107 Nguyễn Phong Sắc, Cầu Giấy, Hà Nội</p>
+            <p><strong>Văn phòng:</strong> Số 86 phố Mễ Trì Hạ, Mễ Trì, Hà Nội</p>
+          </div>
+          <div class="map" aria-label="Bản đồ Google Maps">
+            <div class="placeholder">Bản đồ Google Maps (giả lập)</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> VAGOGE. All rights reserved.
+  </footer>
+
+  <!-- Floating chat button -->
+  <div class="chat">
+    <button type="button" id="chat-btn">💬 Hỗ trợ nhanh</button>
+  </div>
+
+  <script>
+    // Shrink navbar on scroll
+    const nav = document.querySelector('.nav');
+    const menu = document.getElementById('menu');
+    const burger = document.querySelector('.burger');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) nav.classList.add('shrink'); else nav.classList.remove('shrink');
+    });
+
+    // Mobile menu toggle
+    burger.addEventListener('click', () => menu.classList.toggle('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+    // Smooth scroll (enhanced accuracy)
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const id = link.getAttribute('href');
+        if (id.length > 1) {
+          const target = document.querySelector(id);
+          if (target) {
+            e.preventDefault();
+            const top = target.getBoundingClientRect().top + window.scrollY - (nav.clientHeight + 12);
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+        }
+      });
+    });
+
+    // Tabs logic
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.tabpanel');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+        panels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        const panel = document.getElementById(tab.getAttribute('aria-controls'));
+        if (panel) panel.classList.add('active');
+      });
+    });
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      })
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Partner carousel: pause on hover
+    const track = document.getElementById('partner-track');
+    track.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
+    track.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
+
+    // Contact form basic validation and mock submit
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      const errors = [];
+      if (!data.name || data.name.trim().length < 2) errors.push('Vui lòng nhập họ tên hợp lệ');
+      if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errors.push('Email không hợp lệ');
+      if (!data.phone || data.phone.replace(/\D/g, '').length < 9) errors.push('Số điện thoại không hợp lệ');
+      if (!data.message || data.message.trim().length < 10) errors.push('Nội dung cần ít nhất 10 ký tự');
+      if (errors.length) { alert(errors.join('\n')); return; }
+      // TODO backend: gửi email hoặc lưu trữ + reCAPTCHA
+      alert('Đã gửi yêu cầu. Chúng tôi sẽ liên hệ sớm nhất!');
+      form.reset();
+    });
+
+    // Chat button mock
+    document.getElementById('chat-btn').addEventListener('click', () => {
+      alert('Kênh chat trực tuyến sẽ được tích hợp ở bước sau.');
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+
