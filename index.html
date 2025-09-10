@@ -204,6 +204,37 @@
     .plan .cta { margin-top: 6px; }
     @media (max-width: 1200px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 720px) { .pricing-grid { grid-template-columns: 1fr; } }
+
+    /* Product detail */
+    .product { background: #fff; border: 1px solid rgba(15,23,42,0.08); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .product-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px; padding: 16px; }
+    .product .title { margin: 0 0 6px; font-size: 26px; color: var(--blue-900); }
+    .product .sku { font-size: 13px; color: var(--muted); }
+    .price { font-size: 22px; font-weight: 800; color: var(--blue-700); }
+    .gallery { display: grid; gap: 10px; }
+    .gallery-main { width: 100%; aspect-ratio: 4/3; border-radius: var(--radius-sm); overflow: hidden; background: #f1f5f9; display: grid; place-items: center; }
+    .gallery-main img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .thumbs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .thumb { border: 2px solid transparent; border-radius: 10px; overflow: hidden; cursor: pointer; background: #f1f5f9; }
+    .thumb.active { border-color: var(--blue-700); }
+    .thumb img { width: 100%; height: 64px; object-fit: cover; display: block; }
+    .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0; }
+    .badge-pill { padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(11,74,162,0.22); color: var(--blue-700); background: #fff; font-weight: 700; font-size: 12px; }
+    .product-actions { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
+    .sec { background: #fff; border: 1px solid rgba(15,23,42,0.06); border-radius: var(--radius-sm); padding: 12px; }
+    .att-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .att-item { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px; }
+    .att-item strong { display: block; margin-bottom: 4px; color: #0b2a4a; }
+    .rating { display: inline-block; background: #16a34a; color: #fff; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+    @media (max-width: 960px) { .product-grid { grid-template-columns: 1fr; } .thumbs { grid-template-columns: repeat(4, 1fr); } }
+
+    /* Lightbox */
+    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.88); display: none; align-items: center; justify-content: center; z-index: 2000; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .lightbox .nav { position: absolute; top: 50%; transform: translateY(-50%); display: flex; width: 100%; justify-content: space-between; padding: 0 20px; pointer-events: none; }
+    .lightbox .btn-nav { pointer-events: auto; background: rgba(255,255,255,0.9); border: 0; border-radius: 999px; padding: 10px 14px; font-weight: 800; cursor: pointer; }
+    .lightbox .close { position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.9); border: 0; border-radius: 999px; padding: 8px 12px; font-weight: 900; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -251,6 +282,132 @@
       </div>
     </div>
   </header>
+
+  <!-- PRODUCT DETAIL -->
+  <section id="product" aria-labelledby="product-title" class="reveal">
+    <div class="section-inner">
+      <div class="product">
+        <div class="product-grid">
+          <div class="gallery">
+            <div class="gallery-main" id="gallery-main" aria-live="polite">
+              <img id="main-image" src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1200&auto=format&fit=crop" alt="Trung tâm dữ liệu và an ninh mạng">
+            </div>
+            <div class="thumbs" id="thumbs">
+              <div class="thumb active" data-src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1200&auto=format&fit=crop" aria-label="Xem ảnh 1">
+                <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=300&auto=format&fit=crop" alt="Trung tâm dữ liệu">
+              </div>
+              <div class="thumb" data-src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" aria-label="Xem ảnh 2">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=300&auto=format&fit=crop" alt="Bo mạch an ninh">
+              </div>
+              <div class="thumb" data-src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop" aria-label="Xem ảnh 3">
+                <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=300&auto=format&fit=crop" alt="Màn hình mã nguồn">
+              </div>
+              <div class="thumb" data-src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop" aria-label="Xem ảnh 4">
+                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=300&auto=format&fit=crop" alt="AI & dữ liệu">
+              </div>
+              <div class="thumb" data-src="https://images.unsplash.com/photo-1581090124367-7e0cdfbb6795?q=80&w=1200&auto=format&fit=crop" aria-label="Xem ảnh 5">
+                <img src="https://images.unsplash.com/photo-1581090124367-7e0cdfbb6795?q=80&w=300&auto=format&fit=crop" alt="Máy chủ và bảo mật">
+              </div>
+            </div>
+          </div>
+          <div>
+            <h2 id="product-title" class="title">Rar EP – Endpoint Protection thế hệ mới</h2>
+            <div class="sku">Mã SP: RAR-EP-ENT • Tình trạng: Còn hàng</div>
+            <div class="badges">
+              <span class="badge-pill">EDR</span>
+              <span class="badge-pill">DLP</span>
+              <span class="badge-pill">Zero-Trust</span>
+              <span class="badge-pill">UEBA</span>
+              <span class="badge-pill">SOC Ready</span>
+            </div>
+            <p class="muted">Giải pháp bảo vệ thiết bị đầu cuối tập trung, đồng bộ chính sách, giám sát hành vi, ngăn chặn rò rỉ dữ liệu và hỗ trợ truy vết forensics nhanh chóng.</p>
+            <div class="price">Liên hệ để nhận báo giá tốt</div>
+            <div class="product-actions">
+              <a href="#contact" class="btn primary">Liên hệ mua</a>
+              <a href="#pricing" class="btn ghost">Xem gói dịch vụ</a>
+            </div>
+            <div class="sec" style="margin-top:10px;">
+              <strong>Tính năng nổi bật</strong>
+              <ul class="feature-list" style="margin-top:6px;">
+                <li>Quản trị tập trung, triển khai chính sách từ xa</li>
+                <li>Phân tích hành vi người dùng và tiến trình</li>
+                <li>Tự động mã hóa/chặn dữ liệu theo nhãn</li>
+                <li>Cô lập thiết bị nghi nhiễm, rollback nhanh</li>
+                <li>Tích hợp SIEM/SOAR, playbook tự động</li>
+              </ul>
+            </div>
+            <div class="sec" style="margin-top:10px;">
+              <strong>Đánh giá ATTT</strong>
+              <div class="att-grid" style="margin-top:6px;">
+                <div class="att-item">
+                  <strong>Tuân thủ ISO 27001</strong>
+                  <span class="rating">A</span>
+                  <div class="muted" style="font-size:12px;">Chính sách, kiểm soát truy cập, giám sát</div>
+                </div>
+                <div class="att-item">
+                  <strong>ATTT Cấp độ 4</strong>
+                  <span class="rating">A-</span>
+                  <div class="muted" style="font-size:12px;">Đáp ứng tiêu chí kỹ thuật trọng yếu</div>
+                </div>
+                <div class="att-item">
+                  <strong>Privacy (NĐ 13/2023)</strong>
+                  <span class="rating">A</span>
+                  <div class="muted" style="font-size:12px;">DPIA, lưu vết, quản lý yêu cầu chủ thể</div>
+                </div>
+              </div>
+            </div>
+            <div class="sec" style="margin-top:10px;">
+              <strong>Thông số kỹ thuật</strong>
+              <table style="width:100%; border-collapse: collapse; margin-top:6px; font-size:14px;">
+                <tbody>
+                  <tr>
+                    <td style="padding:6px; border-bottom:1px solid #e5e7eb; width:38%">Hệ điều hành hỗ trợ</td>
+                    <td style="padding:6px; border-bottom:1px solid #e5e7eb;">Windows 10/11, Windows Server 2016+, Ubuntu 20.04+, macOS 12+</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:6px; border-bottom:1px solid #e5e7eb;">Mô-đun</td>
+                    <td style="padding:6px; border-bottom:1px solid #e5e7eb;">EDR, DLP, Device Control, Policy Center, Audit/Forensics</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:6px; border-bottom:1px solid #e5e7eb;">Mã hóa</td>
+                    <td style="padding:6px; border-bottom:1px solid #e5e7eb;">AES-256, TLS 1.2+, FIPS 140-2 ready</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:6px;">Ghi nhật ký</td>
+                    <td style="padding:6px;">CEF/JSON, syslog, xuất SIEM</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="sec" style="margin-top:10px;">
+              <strong>Yêu cầu hệ thống</strong>
+              <ul class="feature-list" style="margin-top:6px;">
+                <li>Agent: CPU 2 core, RAM 1 GB, Disk 500 MB</li>
+                <li>Console (on-prem): 4 vCPU, 8 GB RAM, 50 GB SSD</li>
+                <li>Hỗ trợ triển khai HA/Cluster, hoặc dùng SaaS của VAGOGE</li>
+              </ul>
+            </div>
+            <div class="sec" style="margin-top:10px;">
+              <strong>Tích hợp & mở rộng</strong>
+              <ul class="feature-list" style="margin-top:6px;">
+                <li>AD/LDAP, SSO (SAML/OIDC)</li>
+                <li>SIEM/SOAR: gửi log, nhận playbook</li>
+                <li>Webhook/API cho CMDB, ITSM (ServiceNow/Jira)</li>
+              </ul>
+            </div>
+            <div class="sec" style="margin-top:10px;">
+              <strong>Gói & bản quyền</strong>
+              <ul class="feature-list" style="margin-top:6px;">
+                <li>Advanced/Premium/Elite/Ultimate theo số lượng endpoint</li>
+                <li>Bảo trì tiêu chuẩn hoặc 24/7 (SLA nâng cao)</li>
+                <li>Đào tạo quản trị viên và chuyển giao tài liệu</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- PILLARS -->
   <section aria-labelledby="pillars-title" class="reveal">
@@ -451,56 +608,120 @@
         <div class="tabpanel active" id="panel-rar" role="tabpanel" aria-labelledby="tab-rar">
           <div class="card">
             <h3>Rar EP</h3>
-            <p><strong>Điểm khác biệt:</strong> Rar EP được thiết kế dựa trên nhu cầu của nhà quản trị cần kiểm soát và đồng bộ hệ thống CNTT, thiết bị người dùng một cách tập trung và chuyên nghiệp, đặc biệt cho các đơn vị cần bảo vệ, giám sát, tránh lộ lọt dữ liệu nội bộ, bí mật công ty, bí mật nhà nước.</p>
-            <p><strong>Cách hoạt động:</strong></p>
-            <ul>
-              <li>Theo dõi thiết bị ngoại vi, quản trị tập trung → thiết lập chính sách từ xa</li>
-              <li>Áp dụng đồng loạt chính sách quản trị đến người dùng</li>
-              <li>Khả năng tích hợp linh hoạt AV, DLP</li>
+            <p class="muted">Nền tảng bảo vệ thiết bị đầu cuối thế hệ mới, hợp nhất EDR + DLP + kiểm soát thiết bị ngoại vi + quản trị tập trung. Rar EP giảm bề mặt tấn công, phát hiện sớm bất thường, ngăn thất thoát dữ liệu và rút ngắn thời gian ứng phó sự cố.</p>
+            <div class="divider"></div>
+            <strong>Thành phần mô-đun</strong>
+            <ul class="feature-list">
+              <li>EDR: giám sát tiến trình, hành vi, IOC/IOA, cô lập và rollback</li>
+              <li>DLP: phân loại dữ liệu, chính sách theo nhãn, mã hóa/chặn theo ngữ cảnh</li>
+              <li>Device Control: USB/BT/Print, whitelist theo VID/PID, chế độ chỉ đọc</li>
+              <li>Policy Center: quản trị tập trung, đa tầng OU, cấu hình từ xa</li>
+              <li>Audit & Forensics: nhật ký người dùng, ứng dụng, thiết bị, file</li>
+              <li>Tích hợp: SIEM/SOAR, AD/LDAP, Threat Intel, email cảnh báo</li>
             </ul>
-            <p><strong>Lợi ích cho khách hàng:</strong></p>
-            <ul>
-              <li>Ngăn chặn rò rỉ thông tin nhạy cảm, bí mật</li>
-              <li>Đáp ứng ISO 27001 và yêu cầu ATTT cấp độ 4</li>
-              <li>Hỗ trợ điều tra truy vết qua nhật ký người dùng, thiết bị, tài liệu...</li>
+            <strong>Use case tiêu biểu</strong>
+            <ul class="feature-list">
+              <li>Chặn sao chép dữ liệu mật ra USB/Email/Cloud theo nhãn</li>
+              <li>Phát hiện hành vi lạ (UEBA) và tự động cô lập máy bị nghi nhiễm</li>
+              <li>Áp dụng chính sách theo phòng ban, dự án, vị trí địa lý</li>
+              <li>Điều tra nội bộ với timeline sự kiện và phục hồi nhanh</li>
             </ul>
+            <strong>Triển khai & đáp ứng</strong>
+            <ul class="feature-list">
+              <li>On-prem hoặc Cloud, cài agent nhẹ (<50MB), cập nhật gia tăng</li>
+              <li>Đáp ứng ISO 27001, ATTT Cấp độ 4, nhật ký phục vụ kiểm tra</li>
+              <li>KPI: MTTR giảm 60-80%, tỷ lệ rò rỉ dữ liệu giảm >90%</li>
+            </ul>
+            <details class="sol" style="margin-top:8px;">
+              <summary>FAQ</summary>
+              <div class="muted" style="margin-top:6px;">
+                <p><strong>Hiệu năng máy trạm?</strong> Agent tiêu tốn thấp, tối ưu theo profile; có chế độ tắt khi chạy benchmark.</p>
+                <p><strong>Tương thích phần mềm?</strong> Whitelist theo ứng dụng/ký số; hỗ trợ danh mục doanh nghiệp.</p>
+              </div>
+            </details>
           </div>
-          <div class="sol-ill">Minh họa bảo mật / icon</div>
+          <div class="sol-ill">
+            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=900&auto=format&fit=crop" alt="Minh họa Rar EP" style="width:100%; height:100%; object-fit:cover;">
+          </div>
         </div>
         <div class="tabpanel" id="panel-vgsend" role="tabpanel" aria-labelledby="tab-vgsend">
           <div class="card">
             <h3>vgSend – Hệ thống quản lý & truyền file an toàn</h3>
-            <p><strong>Điểm khác biệt:</strong> Đáp ứng gửi nhận, chia sẻ, lưu trữ dữ liệu khối lượng lớn, quy mô quốc gia an toàn và truy vấn thông minh. Tùy chỉnh sâu tiêu chí ATTT, tự động quét – làm sạch – xác thực mọi tệp trước khi đưa vào trung tâm dữ liệu.</p>
-            <p><strong>Cách hoạt động:</strong></p>
-            <ul>
-              <li>Quét virus và quản lý tệp ngay khi gửi lên</li>
-              <li>Lưu trữ và chia sẻ dữ liệu đã làm sạch để truy vấn nhanh</li>
-              <li>Chỉ tệp đã kiểm duyệt, làm sạch mới được đưa vào trung tâm dữ liệu</li>
-              <li>Ghi log chi tiết phục vụ kiểm tra, truy vết</li>
+            <p class="muted">Nền tảng thu nhận – làm sạch – phân phối tệp cho quy mô doanh nghiệp/khối nhà nước. Kiểm soát ATTT trên toàn bộ vòng đời tệp với pipeline tự động hóa và chính sách theo vai trò.</p>
+            <div class="divider"></div>
+            <strong>Luồng xử lý chuẩn</strong>
+            <ol class="feature-list" style="list-style:decimal; padding-left:18px;">
+              <li>Ingest: người dùng/API tải tệp, ký và gắn siêu dữ liệu</li>
+              <li>Scan: AV nhiều lớp + sandbox + file-type validation</li>
+              <li>Sanitize: CDR (khử nội dung ẩn), nén/đổi định dạng an toàn</li>
+              <li>Verify: chữ ký số, checksum, chính sách DLP</li>
+              <li>Distribute: lưu trữ object, CDN nội bộ, cấp quyền truy cập</li>
+            </ol>
+            <strong>Tích hợp</strong>
+            <ul class="feature-list">
+              <li>AD/LDAP, SSO (SAML/OIDC), HSM ký số</li>
+              <li>SIEM/SOAR nhận log, cảnh báo</li>
+              <li>API webhook cho quy trình BPM/ESB</li>
             </ul>
-            <p><strong>Lợi ích cho khách hàng:</strong></p>
-            <ul>
-              <li>Ngăn chặn đưa mã độc hoặc dữ liệu nhiễm độc vào trung tâm dữ liệu</li>
-              <li>Khai thác dữ liệu sạch hiệu quả, giảm thiểu lây nhiễm từ con người</li>
-              <li>Quản trị trực quan, tập trung qua bảng điều khiển</li>
+            <strong>Chỉ số & SLA</strong>
+            <ul class="feature-list">
+              <li>Throughput ≥ 10.000 tệp/giờ, kích thước đơn lẻ tới 50GB</li>
+              <li>Tỷ lệ phát hiện mã độc tăng 20-30% nhờ đa công cụ</li>
+              <li>SLA 99,9% (triển khai cluster, HA, autoscale)</li>
             </ul>
+            <details class="sol" style="margin-top:8px;">
+              <summary>FAQ</summary>
+              <div class="muted" style="margin-top:6px;">
+                <p><strong>Hỗ trợ định dạng nào?</strong> Office/PDF/ảnh/video/nhị phân; có rule riêng cho tệp đặc thù.</p>
+                <p><strong>Giới hạn kích thước?</strong> Có cấu hình; khuyến nghị chunk upload và resume.</p>
+              </div>
+            </details>
           </div>
-          <div class="sol-ill">Minh họa quản lý tệp / icon</div>
+          <div class="sol-ill">
+            <img src="https://images.unsplash.com/photo-1518773553398-650c184e0bb3?q=80&w=900&auto=format&fit=crop" alt="Minh họa vgSend" style="width:100%; height:100%; object-fit:cover;">
+          </div>
         </div>
         <div class="tabpanel" id="panel-pdp" role="tabpanel" aria-labelledby="tab-pdp">
           <div class="card">
             <h3>PDP as a Service</h3>
-            <p><strong>Khác biệt:</strong> Thiết kế chuyên biệt cho DPO để đảm bảo tuân thủ theo khung pháp lý Việt Nam (Nghị định 13/2023/NĐ-CP, Luật số 91/2025/QH15). Triển khai trong vài giờ – không cần hạ tầng riêng; báo cáo tự động trên một hệ thống duy nhất.</p>
-            <p><strong>Cách hoạt động:</strong></p>
-            <ul>
-              <li>Cung cấp mẫu báo cáo theo quy định, tùy chỉnh theo ngành</li>
-              <li>Tự động lưu trữ, cảnh báo hạn kỳ</li>
-              <li>Đánh giá rủi ro (DPIA), quản lý phản hồi của chủ thể dữ liệu</li>
-              <li>Hỗ trợ tạo cookie consent cho đa dạng đối tượng</li>
+            <p class="muted">Nền tảng quản trị tuân thủ bảo vệ dữ liệu cá nhân theo pháp luật Việt Nam. Hỗ trợ DPO thiết lập hồ sơ xử lý, DPIA, ghi sổ hoạt động, quản lý yêu cầu chủ thể dữ liệu và sinh báo cáo tự động.</p>
+            <div class="divider"></div>
+            <strong>Phạm vi tuân thủ</strong>
+            <ul class="feature-list">
+              <li>Nghị định 13/2023/NĐ-CP, Luật Bảo vệ Dữ liệu Cá nhân (dự thảo 2025)</li>
+              <li>Tương thích ISO/IEC 27701, tham chiếu GDPR các điều khoản tương đương</li>
             </ul>
-            <p><strong>Lợi ích:</strong> Tiết kiệm thời gian báo cáo, đảm bảo tuân thủ pháp luật, loại bỏ rủi ro pháp lý, quản lý dữ liệu cá nhân toàn diện – từ thu thập, xử lý, lưu trữ đến phản hồi khiếu nại – tất cả trong một nền tảng.</p>
+            <strong>Quy trình chuẩn</strong>
+            <ol class="feature-list" style="list-style:decimal; padding-left:18px;">
+              <li>Kiểm kê hệ thống & luồng dữ liệu; lập danh mục hoạt động xử lý</li>
+              <li>Đánh giá DPIA và giảm thiểu rủi ro; phê duyệt nội bộ</li>
+              <li>Thiết lập cơ sở pháp lý, chính sách lưu trữ, thời hạn</li>
+              <li>Thiết lập kênh tiếp nhận yêu cầu chủ thể dữ liệu (DSAR)</li>
+              <li>Tạo báo cáo định kỳ, theo đợt thanh tra, và nhật ký truy cập</li>
+            </ol>
+            <strong>Tính năng nổi bật</strong>
+            <ul class="feature-list">
+              <li>Mẫu biểu theo ngành, cảnh báo deadline, chữ ký số báo cáo</li>
+              <li>Quản lý cookie/consent, bản đồ dữ liệu, hợp đồng xử lý</li>
+              <li>Tích hợp SSO, DLP, SIEM để liên kết bằng chứng kỹ thuật</li>
+            </ul>
+            <strong>SLA & KPI</strong>
+            <ul class="feature-list">
+              <li>Triển khai trong 24-72 giờ, không cần hạ tầng riêng</li>
+              <li>Giảm 50-70% thời gian lập báo cáo và theo dõi tuân thủ</li>
+              <li>Độ sẵn sàng 99,9% với sao lưu, phục hồi định kỳ</li>
+            </ul>
+            <details class="sol" style="margin-top:8px;">
+              <summary>FAQ</summary>
+              <div class="muted" style="margin-top:6px;">
+                <p><strong>Dùng cho SME được không?</strong> Có gói rút gọn, quy trình dẫn dắt từng bước.</p>
+                <p><strong>Tương thích quốc tế?</strong> Có module tham chiếu GDPR, ISO 27701.</p>
+              </div>
+            </details>
           </div>
-          <div class="sol-ill">Minh họa tuân thủ / icon</div>
+          <div class="sol-ill">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=900&auto=format&fit=crop" alt="Minh họa tuân thủ PDP" style="width:100%; height:100%; object-fit:cover;">
+          </div>
         </div>
       </div>
 
@@ -518,6 +739,108 @@
           <summary>PDP as a Service</summary>
           <div style="margin-top:8px;" class="muted">Nội dung tương tự tab PDP ở trên.</div>
         </details>
+      </div>
+
+      <!-- Architecture diagrams -->
+      <div class="card" style="margin-top:14px;">
+        <h3>Sơ đồ kiến trúc (tối giản)</h3>
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px;">
+          <div class="sol-ill" style="padding:0;">
+            <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sơ đồ Rar EP">
+              <rect x="10" y="10" width="280" height="160" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+              <rect x="20" y="26" width="120" height="40" rx="8" fill="#dbeafe" stroke="#60a5fa"/>
+              <text x="80" y="50" text-anchor="middle" font-size="12" fill="#0b4aa2">Policy Center</text>
+              <rect x="160" y="26" width="120" height="40" rx="8" fill="#dbeafe" stroke="#60a5fa"/>
+              <text x="220" y="50" text-anchor="middle" font-size="12" fill="#0b4aa2">SIEM/SOAR</text>
+              <rect x="20" y="100" width="80" height="50" rx="8" fill="#fde68a" stroke="#f59e0b"/>
+              <text x="60" y="128" text-anchor="middle" font-size="12" fill="#92400e">EDR</text>
+              <rect x="115" y="100" width="80" height="50" rx="8" fill="#fde68a" stroke="#f59e0b"/>
+              <text x="155" y="128" text-anchor="middle" font-size="12" fill="#92400e">DLP</text>
+              <rect x="210" y="100" width="80" height="50" rx="8" fill="#fde68a" stroke="#f59e0b"/>
+              <text x="250" y="128" text-anchor="middle" font-size="12" fill="#92400e">Device</text>
+              <path d="M80 66 V100" stroke="#60a5fa"/>
+              <path d="M220 66 V100" stroke="#60a5fa"/>
+            </svg>
+          </div>
+          <div class="sol-ill" style="padding:0;">
+            <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sơ đồ vgSend">
+              <rect x="10" y="10" width="280" height="160" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+              <rect x="20" y="24" width="60" height="30" rx="6" fill="#dbeafe" stroke="#60a5fa"/>
+              <text x="50" y="43" text-anchor="middle" font-size="11" fill="#0b4aa2">Ingest</text>
+              <rect x="90" y="24" width="60" height="30" rx="6" fill="#dbeafe" stroke="#60a5fa"/>
+              <text x="120" y="43" text-anchor="middle" font-size="11" fill="#0b4aa2">Scan</text>
+              <rect x="160" y="24" width="60" height="30" rx="6" fill="#dbeafe" stroke="#60a5fa"/>
+              <text x="190" y="43" text-anchor="middle" font-size="11" fill="#0b4aa2">Sanitize</text>
+              <rect x="230" y="24" width="60" height="30" rx="6" fill="#dbeafe" stroke="#60a5fa"/>
+              <text x="260" y="43" text-anchor="middle" font-size="11" fill="#0b4aa2">Distribute</text>
+              <path d="M80 39 H90 M150 39 H160 M220 39 H230" stroke="#60a5fa"/>
+              <rect x="30" y="100" width="100" height="50" rx="8" fill="#fde68a" stroke="#f59e0b"/>
+              <text x="80" y="128" text-anchor="middle" font-size="12" fill="#92400e">SSO/AD/HSM</text>
+              <rect x="170" y="100" width="100" height="50" rx="8" fill="#fde68a" stroke="#f59e0b"/>
+              <text x="220" y="128" text-anchor="middle" font-size="12" fill="#92400e">SIEM/SOAR</text>
+            </svg>
+          </div>
+          <div class="sol-ill" style="padding:0;">
+            <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sơ đồ PDPaaS">
+              <rect x="10" y="10" width="280" height="160" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+              <rect x="20" y="24" width="120" height="30" rx="6" fill="#dbeafe" stroke="#60a5fa"/>
+              <text x="80" y="43" text-anchor="middle" font-size="11" fill="#0b4aa2">Hồ sơ xử lý dữ liệu</text>
+              <rect x="160" y="24" width="120" height="30" rx="6" fill="#dbeafe" stroke="#60a5fa"/>
+              <text x="220" y="43" text-anchor="middle" font-size="11" fill="#0b4aa2">DPIA & Rủi ro</text>
+              <rect x="20" y="100" width="120" height="50" rx="8" fill="#fde68a" stroke="#f59e0b"/>
+              <text x="80" y="128" text-anchor="middle" font-size="12" fill="#92400e">DSAR/Consent</text>
+              <rect x="160" y="100" width="120" height="50" rx="8" fill="#fde68a" stroke="#f59e0b"/>
+              <text x="220" y="128" text-anchor="middle" font-size="12" fill="#92400e">Báo cáo/SLA</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparison table -->
+      <div class="card" style="margin-top:14px; overflow:auto;">
+        <h3>Bảng so sánh nhanh</h3>
+        <table style="width:100%; border-collapse: collapse; font-size:14px;">
+          <thead>
+            <tr style="background:#f8fafc;">
+              <th style="text-align:left; padding:8px; border-bottom:1px solid #e5e7eb;">Tiêu chí</th>
+              <th style="text-align:left; padding:8px; border-bottom:1px solid #e5e7eb;">Rar EP</th>
+              <th style="text-align:left; padding:8px; border-bottom:1px solid #e5e7eb;">vgSend</th>
+              <th style="text-align:left; padding:8px; border-bottom:1px solid #e5e7eb;">PDPaaS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:8px; border-bottom:1px solid #e5e7eb;">Mục tiêu chính</td>
+              <td style="padding:8px; border-bottom:1px solid #e5e7eb;">Bảo vệ endpoint, DLP</td>
+              <td style="padding:8px; border-bottom:1px solid #e5e7eb;">Làm sạch & phân phối tệp</td>
+              <td style="padding:8px; border-bottom:1px solid #e5e7eb;">Quản trị tuân thủ PDP</td>
+            </tr>
+            <tr>
+              <td style="padding:8px; border-bottom:1px solid #e5e7eb;">Triển khai</td>
+              <td style="padding:8px; border-bottom:1px solid #e5e7eb;">Agent + Console</td>
+              <td style="padding:8px; border-bottom:1px solid #e5e7eb;">Cluster dịch vụ</td>
+              <td style="padding:8px; border-bottom:1px solid #e5e7eb;">SaaS/On-prem</td>
+            </tr>
+            <tr>
+              <td style="padding:8px; border-bottom:1px solid #e5e7eb;">Tích hợp</td>
+              <td style="padding:8px; border-bottom:1px solid #e5e7eb;">SIEM/SOAR, AD/LDAP</td>
+              <td style="padding:8px; border-bottom:1px solid #e5e7eb;">SSO, HSM, SIEM</td>
+              <td style="padding:8px; border-bottom:1px solid #e5e7eb;">SSO, DLP, SIEM</td>
+            </tr>
+            <tr>
+              <td style="padding:8px; border-bottom:1px solid #e5e7eb;">KPI</td>
+              <td style="padding:8px; border-bottom:1px solid #e5e7eb;">Giảm MTTR 60-80%</td>
+              <td style="padding:8px; border-bottom:1px solid #e5e7eb;">≥10k tệp/giờ</td>
+              <td style="padding:8px; border-bottom:1px solid #e5e7eb;">Giảm 50-70% thời gian báo cáo</td>
+            </tr>
+            <tr>
+              <td style="padding:8px;">Pháp lý/Chuẩn</td>
+              <td style="padding:8px;">ISO 27001, Cấp độ 4</td>
+              <td style="padding:8px;">Log đầy đủ, kiểm soát truy vết</td>
+              <td style="padding:8px;">NĐ 13/2023, ISO 27701</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -569,19 +892,43 @@
       <p class="muted">Được tin tưởng bởi các đơn vị nghiệp vụ</p>
       <div class="carousel" aria-label="Logo đối tác">
         <div class="track" id="partner-track">
-          <div class="partner">Đối tác A</div>
-          <div class="partner">Đối tác B</div>
-          <div class="partner">Đối tác C</div>
-          <div class="partner">Đối tác D</div>
-          <div class="partner">Đối tác E</div>
-          <div class="partner">Đối tác F</div>
+          <div class="partner" style="background:#fff;">
+            <img src="https://dummyimage.com/140x56/eff6ff/0b4aa2&text=A" alt="Đối tác A" style="max-width:100%; max-height:100%; object-fit:contain;">
+          </div>
+          <div class="partner" style="background:#fff;">
+            <img src="https://dummyimage.com/140x56/eff6ff/0b4aa2&text=B" alt="Đối tác B" style="max-width:100%; max-height:100%; object-fit:contain;">
+          </div>
+          <div class="partner" style="background:#fff;">
+            <img src="https://dummyimage.com/140x56/eff6ff/0b4aa2&text=C" alt="Đối tác C" style="max-width:100%; max-height:100%; object-fit:contain;">
+          </div>
+          <div class="partner" style="background:#fff;">
+            <img src="https://dummyimage.com/140x56/eff6ff/0b4aa2&text=D" alt="Đối tác D" style="max-width:100%; max-height:100%; object-fit:contain;">
+          </div>
+          <div class="partner" style="background:#fff;">
+            <img src="https://dummyimage.com/140x56/eff6ff/0b4aa2&text=E" alt="Đối tác E" style="max-width:100%; max-height:100%; object-fit:contain;">
+          </div>
+          <div class="partner" style="background:#fff;">
+            <img src="https://dummyimage.com/140x56/eff6ff/0b4aa2&text=F" alt="Đối tác F" style="max-width:100%; max-height:100%; object-fit:contain;">
+          </div>
           <!-- duplicate for seamless scroll -->
-          <div class="partner">Đối tác A</div>
-          <div class="partner">Đối tác B</div>
-          <div class="partner">Đối tác C</div>
-          <div class="partner">Đối tác D</div>
-          <div class="partner">Đối tác E</div>
-          <div class="partner">Đối tác F</div>
+          <div class="partner" style="background:#fff;">
+            <img src="https://dummyimage.com/140x56/eff6ff/0b4aa2&text=A" alt="Đối tác A" style="max-width:100%; max-height:100%; object-fit:contain;">
+          </div>
+          <div class="partner" style="background:#fff;">
+            <img src="https://dummyimage.com/140x56/eff6ff/0b4aa2&text=B" alt="Đối tác B" style="max-width:100%; max-height:100%; object-fit:contain;">
+          </div>
+          <div class="partner" style="background:#fff;">
+            <img src="https://dummyimage.com/140x56/eff6ff/0b4aa2&text=C" alt="Đối tác C" style="max-width:100%; max-height:100%; object-fit:contain;">
+          </div>
+          <div class="partner" style="background:#fff;">
+            <img src="https://dummyimage.com/140x56/eff6ff/0b4aa2&text=D" alt="Đối tác D" style="max-width:100%; max-height:100%; object-fit:contain;">
+          </div>
+          <div class="partner" style="background:#fff;">
+            <img src="https://dummyimage.com/140x56/eff6ff/0b4aa2&text=E" alt="Đối tác E" style="max-width:100%; max-height:100%; object-fit:contain;">
+          </div>
+          <div class="partner" style="background:#fff;">
+            <img src="https://dummyimage.com/140x56/eff6ff/0b4aa2&text=F" alt="Đối tác F" style="max-width:100%; max-height:100%; object-fit:contain;">
+          </div>
         </div>
       </div>
       <blockquote class="card" style="margin-top:14px; font-style: italic; border-left: 4px solid var(--accent);">
@@ -691,6 +1038,53 @@
         const panel = document.getElementById(tab.getAttribute('aria-controls'));
         if (panel) panel.classList.add('active');
       });
+    });
+
+    // Product gallery thumbs
+    const mainImage = document.getElementById('main-image');
+    const thumbs = document.querySelectorAll('#thumbs .thumb');
+    thumbs.forEach((t, idx) => {
+      t.addEventListener('click', () => {
+        thumbs.forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        const src = t.getAttribute('data-src');
+        if (src) mainImage.setAttribute('src', src);
+        currentIndex = idx;
+      });
+    });
+
+    // Lightbox
+    let currentIndex = 0;
+    const gallerySources = Array.from(thumbs).map(t => t.getAttribute('data-src'));
+    const lightbox = document.createElement('div');
+    lightbox.className = 'lightbox';
+    lightbox.innerHTML = `
+      <button class="close" aria-label="Đóng">✕</button>
+      <img alt="Xem ảnh lớn" />
+      <div class="nav">
+        <button class="btn-nav" data-dir="-1" aria-label="Ảnh trước">‹</button>
+        <button class="btn-nav" data-dir="1" aria-label="Ảnh tiếp">›</button>
+      </div>
+    `;
+    document.body.appendChild(lightbox);
+    const lbImg = lightbox.querySelector('img');
+    const openLightbox = (index) => {
+      currentIndex = (index + gallerySources.length) % gallerySources.length;
+      lbImg.src = gallerySources[currentIndex];
+      lightbox.classList.add('open');
+    };
+    const closeLightbox = () => lightbox.classList.remove('open');
+    const step = (d) => openLightbox(currentIndex + d);
+    document.getElementById('gallery-main')?.addEventListener('click', () => openLightbox(currentIndex));
+    thumbs.forEach((t, i) => t.addEventListener('dblclick', () => openLightbox(i)));
+    lightbox.querySelector('.close')?.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    lightbox.querySelectorAll('.btn-nav').forEach(btn => btn.addEventListener('click', () => step(parseInt(btn.getAttribute('data-dir')||'1', 10))));
+    window.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') step(1);
+      if (e.key === 'ArrowLeft') step(-1);
     });
 
     // Reveal on scroll
